@@ -17,6 +17,13 @@ PERSISTENT_PEERS="d8ac979da3dbe2f796e2344616096160dc5cfdc1@164.92.191.127:26656,
 SYNC_RPC_1=https://cosmos-rpc.polkachu.com:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
 GENESIS_URL=https://snapshots.polkachu.com/genesis/evmos/genesis.json
+EXTERNAL_ADDRESS=".0.0.0.0:26656"
+MEMPOOL_SIZE=500
+MINIMUM_GAS_PRICES="0.0025aevmos"
+PRUNING="custom"
+PRUNING_KEEP_RECENT="100"
+PRUNING_KEEP_EVERY="2000"
+PRUNING_INTERVAL="10"
 
 # Basic Installation
 echo "Installing Basic..."
@@ -67,7 +74,13 @@ rm -rf $NODE_HOME
 $CHAIN_BINARY init $NODE_MONIKER --chain-id $CHAIN_ID
 sed -i -e "/seeds =/ s^= .*^= \"$SEEDS\"^" $NODE_HOME/config/config.toml
 sed -i -e "/persistent_peers =/ s^= .*^= \"$PERSISTENT_PEERS\"^" $NODE_HOME/config/config.toml
-sed -i -e "/minimum-gas-prices =/ s^= .*^= \"0.0001uatom\"^" $NODE_HOME/config/app.toml
+sed -i -e "/external_address =/ s^= .*^= \"$EXTERNAL_ADDRESS\"^" $NODE_HOME/config/config.toml
+sed -i -e "/^size =/ s^= .*^= $MEMPOOL_SIZE^" $NODE_HOME/config/config.toml
+sed -i -e "/minimum-gas-prices =/ s^= .*^= \"$MINIMUM_GAS_PRICES\"^" $NODE_HOME/config/app.toml
+sed -i -e "/pruning =/ s^= .*^= \"$PRUNING\"^" $NODE_HOME/config/app.toml
+sed -i -e "/pruning-keep-recent =/ s^= .*^= \"$PRUNING_KEEP_RECENT\"^" $NODE_HOME/config/app.toml
+sed -i -e "/pruning-keep-every =/ s^= .*^= \"$PRUNING_KEEP_EVERY\"^" $NODE_HOME/config/app.toml
+sed -i -e "/pruning-interval =/ s^= .*^= \"$PRUNING_INTERVAL\"^" $NODE_HOME/config/app.toml
 sed -i -e "/chain-id =/ s^= .*^= \"$CHAIN_ID\"^" $NODE_HOME/config/client.toml
 
 # Replace genesis file: only after the spawn time is reached

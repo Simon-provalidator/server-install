@@ -7,7 +7,7 @@ CHAIN_SIGNER=nomic-signer
 CHAIN_RELAYER=nomic-relayer
 NODE_MONIKER=node
 SEEDS="238120dfe716082754048057c1fdc3d6f09609b5@161.35.51.124:26656,a67d7a4d90f84d5c67bfc196aac68441ba9484a6@167.99.119.196:26659"
-EXTERNAL_ADDRESS="5.78.46.71:26656"
+EXTERNAL_ADDRESS="0.0.0.0:26656"
 
 # nomic currently requires rust nightly
 rustup default nightly

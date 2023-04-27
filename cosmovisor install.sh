@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# Binary-name Node-home
-
 # Configuration
-CHAIN_BINARY=$1
-NODE_HOME=$HOME/.$2
 SERVICE_NAME=cosmovisor
 
 # Set up cosmovisor
@@ -19,7 +15,7 @@ go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.3.0
 
 echo "Creating $SERVICE_NAME.service..."
 sudo rm /etc/systemd/system/$SERVICE_NAME.service
-sudo tee <<EOF >/dev/null /etc/systemd/system/$CHAIN_BINARY.service
+sudo tee <<EOF >/dev/null /etc/systemd/system/$SERVICE_NAME.service
 
 [Unit]
 Description=Cosmovisor service
