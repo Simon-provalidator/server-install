@@ -152,6 +152,8 @@ sudo systemctl restart systemd-journald
 
 # Service(Cosmovisor)
 ```
+SERVICE_NAME=cosmovisor
+
 # Set up cosmovisor
 echo "Setting up cosmovisor..."
 mkdir -p $NODE_HOME/cosmovisor/genesis/bin
