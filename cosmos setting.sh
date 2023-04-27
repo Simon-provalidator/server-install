@@ -7,7 +7,6 @@ BRANCH=v9.0.3
 NODE_HOME=$HOME/.gaia
 NODE_MONIKER=validator
 GITURL=https://github.com/cosmos/gaia
-NODE_HOME=$HOME/.gaia
 CHAIN_NAME=gaia
 CHAIN_BINARY=gaiad
 CHAIN_ID=cosmoshub-4
