@@ -1,4 +1,7 @@
 # Server-Install
+```
+sh cosmos setting.sh
+```
 
 # Configuration
 ```
@@ -19,4 +22,35 @@ PERSISTENT_PEERS="4437ef919ce6f55a4c2672b9808cfb7e2393df37@54.193.193.123:26656"
 SYNC_RPC_1=https://cosmos-rpc.polkachu.com:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
 GENESIS_URL=https://snapshots.polkachu.com/genesis/cosmos/genesis.json
+```
+
+# Service
+```
+# Set up Daemon
+echo "Creating $CHAIN_BINARY.service..."
+sudo rm /etc/systemd/system/$CHAIN_BINARY.service
+
+sudo tee <<EOF >/dev/null /etc/systemd/system/$CHAIN_BINARY.service
+[Unit]
+Description=$CHAIN_BINARY daemon
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$HOME/go/bin/$CHAIN_BINARY start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=10000
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Start service
+sudo systemctl daemon-reload
+
+# Enable and start the service
+sudo systemctl enable $CHAIN_BINARY.service
+sudo systemctl start $CHAIN_BINARY.service
+sudo systemctl restart systemd-journald
 ```
