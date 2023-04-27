@@ -1,6 +1,6 @@
 # Server-Install
 ```
-sh cosmos setting.sh
+sh {chian_name} setting.sh
 ```
 
 # Configuration
