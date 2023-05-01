@@ -1,7 +1,5 @@
 # Configuration
 You need to modify it and use it.
-SNAP_SHOT_URL=https://snapshots.polkachu.com/snapshots/cosmos/cosmos_15059588.tar.lz4
-EXTERNAL_ADDRESS="0.0.0.0:26656"
 ```
 # Change settings Configuration
 GO_VERSION=1.18.10
