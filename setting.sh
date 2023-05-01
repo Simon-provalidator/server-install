@@ -1,7 +1,6 @@
 #!/bin/bash
 
 chmod u+r+x ./config/config.sh
-chmod u+r+x ./chians
 
 COSMOS=1
 JUNO=2

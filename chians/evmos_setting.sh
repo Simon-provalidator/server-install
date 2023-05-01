@@ -18,6 +18,7 @@ SYNC_RPC_1=https://evmos-rpc.polkachu.com:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
 GENESIS_URL=https://snapshots.polkachu.com/genesis/evmos/genesis.json
 MINIMUM_GAS_PRICES="0.0025aevmos"
+CHECK=1
 
 # Basic Installation
 echo "Installing Basic..."
@@ -73,7 +74,6 @@ sed -i -e "/^size =/ s^= .*^= $MEMPOOL_SIZE^" $NODE_HOME/config/config.toml
 sed -i -e "/minimum-gas-prices =/ s^= .*^= \"$MINIMUM_GAS_PRICES\"^" $NODE_HOME/config/app.toml
 sed -i -e "/pruning =/ s^= .*^= \"$PRUNING\"^" $NODE_HOME/config/app.toml
 sed -i -e "/pruning-keep-recent =/ s^= .*^= \"$PRUNING_KEEP_RECENT\"^" $NODE_HOME/config/app.toml
-sed -i -e "/pruning-keep-every =/ s^= .*^= \"$PRUNING_KEEP_EVERY\"^" $NODE_HOME/config/app.toml
 sed -i -e "/pruning-interval =/ s^= .*^= \"$PRUNING_INTERVAL\"^" $NODE_HOME/config/app.toml
 sed -i -e "/chain-id =/ s^= .*^= \"$CHAIN_ID\"^" $NODE_HOME/config/client.toml
 
