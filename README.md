@@ -2,7 +2,6 @@
 You need to modify it and use it. {server_ip}, {snapshot_url}
 ```
 config.sh
-
 # Configuration
 GO_VERSION=1.18.10
 STATE_SYNC=false
