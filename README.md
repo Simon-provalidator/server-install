@@ -1,34 +1,27 @@
 # Configuration
-```
-GO_VERSION=1.18.10
-BRANCH=v9.0.3
-NODE_HOME=$HOME/.gaia
-NODE_MONIKER=validator
-GITURL=https://github.com/cosmos/gaia
-NODE_HOME=$HOME/.gaia
-CHAIN_NAME=gaia
-CHAIN_BINARY=gaiad
-CHAIN_ID=cosmoshub-4
-STATE_SYNC=false
-SNAP_SHOT=true
+You need to modify it and use it.
 SNAP_SHOT_URL=https://snapshots.polkachu.com/snapshots/cosmos/cosmos_15059588.tar.lz4
-SEEDS=""
-PERSISTENT_PEERS="4437ef919ce6f55a4c2672b9808cfb7e2393df37@54.193.193.123:26656"
-SYNC_RPC_1=https://cosmos-rpc.polkachu.com:443
-SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
-GENESIS_URL=https://snapshots.polkachu.com/genesis/cosmos/genesis.json
+EXTERNAL_ADDRESS="0.0.0.0:26656"
+```
+# Change settings Configuration
+GO_VERSION=1.18.10
+SNAP_SHOT_URL={snapshot_url}
 EXTERNAL_ADDRESS="{server_ip}:26656"
-MEMPOOL_SIZE=500
-MINIMUM_GAS_PRICES="0.0001uatom"
-PRUNING="custom"
-PRUNING_KEEP_RECENT="100"
-PRUNING_KEEP_EVERY="2000"
-PRUNING_INTERVAL="10"
 ```
 
 # Start
 ```
-sh {chian_name} setting.sh
+sh setting.sh
+What network you going to interact:
+1. CosmosHub
+2. Juno
+3. Sifchian
+4. Evmos
+1
+Cosmovisor Install?
+1. Yes
+2. No
+1
 ```
 
 # Service(Daemon)
