@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 # Set up a service to join the  chain.
 
-sources ../config/config.sh
+source ./config/config.sh
 
 # Configuration
 BRANCH=v9.0.3
@@ -50,7 +50,7 @@ export GO111MODULE=on
 export GOBIN=$GOPATH/bin
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 EOF
-. $HOME/.profile
+source $HOME/.profile
 mkdir -p ~/go/bin | mkdir -p ~/go/src/github.com | mkdir -p ~/go/pkg
 
 # Install $CHAIN_BINARY binary
