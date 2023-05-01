@@ -1,5 +1,5 @@
 # Configuration
-You need to modify it and use it.
+You need to modify it and use it. {snapshot_url}, {server_ip}
 ```
 # Change settings Configuration
 GO_VERSION=1.18.10
