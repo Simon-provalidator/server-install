@@ -1,31 +1,18 @@
 #!/bin/sh
-# Set up a service to join the  chain.
 
-# Configuration
+sh ./config/config.sh
+
+# Change settings Configuration
 GO_VERSION=1.18.10
-BRANCH=v14.1.0
-NODE_HOME=$HOME/.juno
-NODE_MONIKER=node
-GITURL=https://github.com/CosmosContracts/juno
-CHAIN_NAME=juno
-CHAIN_BINARY=junod
-CHAIN_ID=juno-1
-STATE_SYNC=false
-SNAP_SHOT=true
-SNAP_SHOT_URL=https://snapshots.polkachu.com/snapshots/juno/juno_8012819.tar.lz4
-SEEDS="47ba9e0e413e14a778b0c2139d7e49cf3d3c9c07@141.94.195.104:26656"
-PERSISTENT_PEERS="4a91597dfe3ec715bbf6def225066fbb6ad86cfe@207.180.204.112:36656,9db06fae1998a14c79cb13d50152828b9fa049e9@195.201.161.122:26656,bae287c31f9b23642be7c3c71a9420d6361807b1@95.216.101.38:26656,f5cfce229f71997d7f4cc766909427ee76a8b4f3@38.146.3.191:26656,ec41af656b3450050ae27559b66b877373c44861@65.21.122.47:26656,5479526dbdf4f27aa59ddc52be9cf2614049d28e@185.216.178.75:26656,fd1e3f9baf1922f81bfd9754ddbc4269dbf08264@38.146.3.181:26656,e0fbaf1ef89afad23444e67b334bdf78a4b598fd@65.108.71.92:52656,a08f7b76eb274fb453dcb8be8b237ddb90e41638@135.125.180.36:36656,f79ce2fab55e56b408d76ddcbc1c82c1a90e315b@54.74.146.114:26656,39b02285db6a2fe87aad8f17c70e68e037bedbde@185.252.235.216:26758,ed90921d43ede634043d152d7a87e8881fb85e90@65.108.77.106:26709,8228e05a49947039b1ab9f26ac1eac3c96f56031@135.181.223.115:26656,bd0c65e90ea582d45a84bf0c7a46b7eac19b3613@88.99.219.120:52656,962c55015ea99f769a50c78c1cc4edf6bc174ab2@173.212.246.126:26666,51f9e32a76d738c51dfa353917cef10729b6a600@161.97.118.84:26656,c96c8e2b31bda1bde94e14dc4cbd483156d72348@194.146.25.205:26656,edc35b09613096598e20f8508c977806093d7eec@194.61.28.217:26656,abfccd2f0935e07e3c3494f4ca2e6228e5779267@64.5.123.27:26656,256a94965d448b56bd05e01eb4af082f5e65cfc2@222.106.187.14:53706,e0cf28c0a5180dd72d7c444d08bd425723995bf9@13.38.148.24:26656,ae50fb5e1b4d57aeacd15f623825b72fda210b21@159.203.187.173:26656,9c7b6cedc9b063ed4b1ec18cc88a6960493568eb@66.228.33.24:26656"
-SYNC_RPC_1=https://juno-rpc.polkachu.com:443
-SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
-GENESIS_URL=https://snapshots.polkachu.com/genesis/juno/genesis.json
+SNAP_SHOT_URL={snapshot_url}
 EXTERNAL_ADDRESS="{server_ip}:26656"
+
+# Basic Configuration
 MEMPOOL_SIZE=500
-MINIMUM_GAS_PRICES="0.0025ujuno"
 PRUNING="custom"
 PRUNING_KEEP_RECENT="100"
 PRUNING_KEEP_EVERY="2000"
 PRUNING_INTERVAL="10"
-SNAPSHOT_INTERVAL=2000
 
 # Basic Installation
 echo "Installing Basic..."
@@ -46,9 +33,9 @@ sudo apt install nodejs=20.* yarn build-essential jq -y
 
 # Install go $GO_VERSION
 echo "Installing go..."
+rm go*linux-amd64.tar.gz
 wget https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
-rm go*linux-amd64.tar.gz
 
 # Update environment variables to include go
 cat <<'EOF' >>$HOME/.profile
@@ -83,7 +70,6 @@ sed -i -e "/pruning =/ s^= .*^= \"$PRUNING\"^" $NODE_HOME/config/app.toml
 sed -i -e "/pruning-keep-recent =/ s^= .*^= \"$PRUNING_KEEP_RECENT\"^" $NODE_HOME/config/app.toml
 sed -i -e "/pruning-keep-every =/ s^= .*^= \"$PRUNING_KEEP_EVERY\"^" $NODE_HOME/config/app.toml
 sed -i -e "/pruning-interval =/ s^= .*^= \"$PRUNING_INTERVAL\"^" $NODE_HOME/config/app.toml
-sed -i -e "/snapshot-interval =/ s^= .*^= \"$SNAPSHOT_INTERVAL\"^" $NODE_HOME/config/app.toml
 sed -i -e "/chain-id =/ s^= .*^= \"$CHAIN_ID\"^" $NODE_HOME/config/client.toml
 
 # Replace genesis file: only after the spawn time is reached
@@ -114,6 +100,59 @@ else
     echo "Skipping snap shot..."
 fi
 
+echo "Cosmovisor Install?"
+echo "1. Yes"
+echo "2. No"
+
+read i
+
+if i=1; then
+
+# Set up cosmovisor
+SERVICE_NAME=cosmovisor
+echo "Setting up cosmovisor..."
+mkdir -p $NODE_HOME/cosmovisor/genesis/bin
+mkdir -p $NODE_HOME/cosmovisor/upgrades
+cp $(which $CHAIN_BINARY) $NODE_HOME/cosmovisor/genesis/bin
+
+echo "Installing cosmovisor..."
+export BINARY=$NODE_HOME/cosmovisor/genesis/bin/$CHAIN_BINARY
+go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.3.0
+
+echo "Creating $SERVICE_NAME.service..."
+sudo rm /etc/systemd/system/$SERVICE_NAME.service
+sudo tee <<EOF >/dev/null /etc/systemd/system/$SERVICE_NAME.service
+
+[Unit]
+Description=Cosmovisor service
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$HOME/go/bin/cosmovisor run start --x-crisis-skip-assert-invariants
+Restart=always
+RestartSec=10
+LimitNOFILE=50000
+Environment='DAEMON_NAME=$CHAIN_BINARY'
+Environment='DAEMON_HOME=$NODE_HOME'
+Environment='DAEMON_ALLOW_DOWNLOAD_BINARIES=true'
+Environment='DAEMON_RESTART_AFTER_UPGRADE=true'
+Environment='DAEMON_LOG_BUFFER_SIZE=512'
+Environment='UNSAFE_SKIP_BACKUP=true'
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Start service
+sudo systemctl daemon-reload
+
+# Enable and start
+sudo systemctl enable $SERVICE_NAME.service
+sudo systemctl start $SERVICE_NAME.service
+sudo systemctl restart systemd-journald
+
+else
 # Set up Daemon
 echo "Creating $CHAIN_BINARY.service..."
 sudo rm /etc/systemd/system/$CHAIN_BINARY.service
@@ -141,3 +180,4 @@ sudo systemctl daemon-reload
 sudo systemctl enable $CHAIN_BINARY.service
 sudo systemctl start $CHAIN_BINARY.service
 sudo systemctl restart systemd-journald
+fi
