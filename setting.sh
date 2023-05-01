@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ./config/config.sh
+./config/config.sh
 
 # Change settings Configuration
 GO_VERSION=1.18.10
