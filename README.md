@@ -1,10 +1,16 @@
 # Configuration
 You need to modify it and use it. {snapshot_url}, {server_ip}
 ```
-# Change settings Configuration
+# Configuration
 GO_VERSION=1.18.10
-SNAP_SHOT_URL={snapshot_url}
+STATE_SYNC=false
+SNAP_SHOT=true
 EXTERNAL_ADDRESS="{server_ip}:26656"
+MEMPOOL_SIZE=500
+PRUNING="custom"
+PRUNING_KEEP_RECENT="100"
+PRUNING_KEEP_EVERY="2000"
+PRUNING_INTERVAL="10"
 ```
 
 # Start
