@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
-./config/config.sh
+chmod u+r+x ./config/config.sh
+sources ./config/config.sh
 
 # Change settings Configuration
 GO_VERSION=1.18.10
@@ -13,6 +14,7 @@ PRUNING="custom"
 PRUNING_KEEP_RECENT="100"
 PRUNING_KEEP_EVERY="2000"
 PRUNING_INTERVAL="10"
+CHECK=1
 
 # Basic Installation
 echo "Installing Basic..."
@@ -106,7 +108,7 @@ echo "2. No"
 
 read i
 
-if i=1; then
+if [ {$i} == {$CHECK} ]; then
 
 # Set up cosmovisor
 SERVICE_NAME=cosmovisor
