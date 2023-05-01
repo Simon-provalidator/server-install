@@ -1,6 +1,8 @@
 # Configuration
-You need to modify it and use it. {snapshot_url}, {server_ip}
+You need to modify it and use it. {server_ip}, {snapshot_url}
 ```
+config.sh
+
 # Configuration
 GO_VERSION=1.18.10
 STATE_SYNC=false
@@ -11,6 +13,9 @@ PRUNING="custom"
 PRUNING_KEEP_RECENT="100"
 PRUNING_KEEP_EVERY="2000"
 PRUNING_INTERVAL="10"
+
+cosmos_seting.sh
+SNAP_SHOT_URL={snapshot_url}
 ```
 
 # Start
