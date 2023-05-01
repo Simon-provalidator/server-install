@@ -14,7 +14,7 @@ PRUNING_KEEP_RECENT="100"
 PRUNING_KEEP_EVERY="2000"
 PRUNING_INTERVAL="10"
 
-cosmos_seting.sh
+cosmos_setting.sh
 SNAP_SHOT_URL={snapshot_url}
 ```
 
