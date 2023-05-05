@@ -171,7 +171,7 @@ After=network-online.target
 [Service]
 User=$USER
 ExecStart=$HOME/go/bin/$CHAIN_BINARY start
-Restart=on-failure
+Restart=always
 RestartSec=10
 LimitNOFILE=10000
 

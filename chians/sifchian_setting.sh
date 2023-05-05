@@ -37,11 +37,11 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt install nodejs=20.* yarn build-essential jq -y
 
-# Install go 1.18.10
+# Install go $GO_VERSION
 echo "Installing go..."
 rm go*linux-amd64.tar.gz
-wget https://go.dev/dl/go1.18.10.linux-amd64.tar.gz
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.18.10.linux-amd64.tar.gz
+wget https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
 
 # Update environment variables to include go
 cat <<'EOF' >>$HOME/.profile
@@ -170,7 +170,7 @@ After=network-online.target
 [Service]
 User=$USER
 ExecStart=$HOME/go/bin/$CHAIN_BINARY start
-Restart=on-failure
+Restart=always
 RestartSec=10
 LimitNOFILE=10000
 
