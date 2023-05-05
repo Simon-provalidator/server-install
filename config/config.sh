@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-GO_VERSION=1.18.10
+GO_VERSION=1.20.3
 STATE_SYNC=false
 SNAP_SHOT=true
 EXTERNAL_ADDRESS="{server_ip}:26656"
