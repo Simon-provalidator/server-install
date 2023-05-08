@@ -13,10 +13,9 @@ CHAIN_BINARY=regen
 CHAIN_ID=regen-1
 SNAP_SHOT_URL=https://snapshots.alexvalidator.com/regen/regen-1_2023-05-08.tar
 SEEDS=""
-PERSISTENT_PEERS="ebc272824924ea1a27ea3183dd0b9ba713494f83@regen-mainnet-peer.autostake.com,ec52701cee3167e59a7f34c92255fc07475436e8@137.184.24.248:26656"
-SYNC_RPC_1=https://regen-mainnet-rpc.autostake.com:443
+PERSISTENT_PEERS="69975e7afdf731a165e40449fcffc75167a084fc@104.131.169.70:26656,d35d652b6cb3bf7d6cb8d4bd7c036ea03e7be2ab@116.203.182.185:26656,ffacd3202ded6945fed12fa4fd715b1874985b8c@3.98.38.91:26656,ec52701cee3167e59a7f34c92255fc07475436e8@137.184.24.248:26656"
+SYNC_RPC_1=https://regen-rpc.theamsolutions.info:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
-GENESIS_URL=https://rpc-regen.archive.bitszn.com/genesis
 MINIMUM_GAS_PRICES="0.01uregen"
 CHECK=1
 
@@ -79,8 +78,7 @@ sed -i -e "/chain-id =/ s^= .*^= \"$CHAIN_ID\"^" $NODE_HOME/config/client.toml
 
 # Replace genesis file: only after the spawn time is reached
 echo "Replacing genesis file..."
-wget -O genesis.json $GENESIS_URL --inet4-only
-mv genesis.json $NODE_HOME/config/genesis.json
+curl -s https://raw.githubusercontent.com/regen-network/mainnet/main/regen-1/genesis.json > $NODE_HOME/config/genesis.json
 
 if $STATE_SYNC ; then
     echo "Configuring state sync..."
