@@ -4,20 +4,20 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=pismoC
-NODE_HOME=$HOME/.agoric
+BRANCH=v5.1.0
+NODE_HOME=$HOME/.regen
 NODE_MONIKER=validator
-GITURL=https://github.com/Agoric/agoric-sdk
-CHAIN_NAME=agoric-sdk
-CHAIN_BINARY=agd
-CHAIN_ID=agoric-3
-SNAP_SHOT_URL=https://snapshots.polkachu.com/snapshots/agoric/agoric_9781388.tar.lz4
+GITURL=https://github.com/regen-network/regen-ledger
+CHAIN_NAME=regen-ledger
+CHAIN_BINARY=regen
+CHAIN_ID=regen-1
+SNAP_SHOT_URL=https://snapshots.alexvalidator.com/regen/regen-1_2023-05-08.tar
 SEEDS=""
-PERSISTENT_PEERS="4bc6c457c018b81a19efa49a9e403b64535decf1@137.184.141.111:26656"
-SYNC_RPC_1=https://agoric-rpc.polkachu.com:443
+PERSISTENT_PEERS="ebc272824924ea1a27ea3183dd0b9ba713494f83@regen-mainnet-peer.autostake.com,ec52701cee3167e59a7f34c92255fc07475436e8@137.184.24.248:26656"
+SYNC_RPC_1=https://regen-mainnet-rpc.autostake.com:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
-GENESIS_URL=https://snapshots.polkachu.com/genesis/agoric/genesis.json
-MINIMUM_GAS_PRICES="0ubld"
+GENESIS_URL=https://rpc-regen.archive.bitszn.com/genesis
+MINIMUM_GAS_PRICES="0.01uregen"
 CHECK=1
 
 # Basic Installation
@@ -27,15 +27,15 @@ sudo apt-get upgrade -y
 sudo apt-get install build-essential make jq net-tools gcc gzip sysstat htop chrony manpages-dev -y
 sudo apt install make clang pkg-config libssl-dev build-essential git jq ncdu bsdmainutils htop net-tools lsof -y < "/dev/null"
 sudo apt update
-sudo apt install snapd yarn -y
+sudo apt install snapd -y
 sudo snap install lz4
 
 # Install nodejs
 echo "Installing node.js..."
-curl https://deb.nodesource.com/setup_18.x | sudo bash
+curl https://deb.nodesource.com/setup_20.x | sudo bash
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt install nodejs=18.* yarn build-essential jq -y
+sudo apt install nodejs=20.* yarn build-essential jq -y
 
 # Install go $GO_VERSION
 echo "Installing go..."
@@ -61,9 +61,7 @@ cd ~/go/src/github.com
 git clone $GITURL
 cd $CHAIN_NAME
 git checkout $BRANCH
-yarn install
-yarn build
-cd packages/cosmic-swingset && make
+make install
 
 # Initialize home directory
 echo "Initializing $NODE_HOME..."
@@ -101,7 +99,7 @@ fi
 if $SNAP_SHOT ; then
     echo "Setting snap shot..."
     wget -O snap_shot.tar.lz4 $SNAP_SHOT_URL
-    lz4 -c -d snap_shot.tar.lz4  | tar -x -C $NODE_HOME
+    tar -x -C $NODE_HOME
     rm -v snap_shot.tar.lz4
 else
     echo "Skipping snap shot..."
@@ -120,7 +118,7 @@ SERVICE_NAME=cosmovisor
 echo "Setting up cosmovisor..."
 mkdir -p $NODE_HOME/cosmovisor/genesis/bin
 mkdir -p $NODE_HOME/cosmovisor/upgrades
-ln -s $HOME/go/src/github.com/agoric-sdk/bin/agd $NODE_HOME/cosmovisor/genesis/bin/agd
+cp $(which $CHAIN_BINARY) $NODE_HOME/cosmovisor/genesis/bin
 
 echo "Installing cosmovisor..."
 export BINARY=$NODE_HOME/cosmovisor/genesis/bin/$CHAIN_BINARY
@@ -142,7 +140,7 @@ RestartSec=10
 LimitNOFILE=50000
 Environment='DAEMON_NAME=$CHAIN_BINARY'
 Environment='DAEMON_HOME=$NODE_HOME'
-Environment='DAEMON_ALLOW_DOWNLOAD_BINARIES=false'
+Environment='DAEMON_ALLOW_DOWNLOAD_BINARIES=true'
 Environment='DAEMON_RESTART_AFTER_UPGRADE=true'
 Environment='DAEMON_LOG_BUFFER_SIZE=512'
 Environment='UNSAFE_SKIP_BACKUP=true'
