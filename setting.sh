@@ -9,6 +9,8 @@ EVMOS=4
 OSMOSIS=5
 UMEE=6
 CHIHUAHUA=7
+AGORIC=8
+
 
 # Select Chain
 echo "What network you going to interact:"
@@ -19,6 +21,7 @@ echo "4. Evmos"
 echo "5. Osmosis"
 echo "6. Umee"
 echo "7. Chihuahua"
+echo "8. Agoric"
 
 read i
 
@@ -36,6 +39,8 @@ elif [ {$i} == {$UMEE} ]; then
     bash ./chians/umee_setting.sh
 elif [ {$i} == {$CHIHUAHUA} ]; then
     bash ./chians/chihuahua_setting.sh
+elif [ {$i} == {$AGORIC} ]; then
+    bash ./chians/agoric_setting.sh
 else
     echo "It's a chain that doesn't exist."
 fi
