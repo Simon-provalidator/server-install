@@ -12,6 +12,7 @@ CHIHUAHUA=7
 AGORIC=8
 REGEN=9
 AXELAR=10
+AXELAR_TESTNET=11
 
 # Select Chain
 echo "What network you going to interact:"
@@ -24,7 +25,8 @@ echo "6. Umee"
 echo "7. Chihuahua"
 echo "8. Agoric"
 echo "9. Regen"
-echo "9. Axelar"
+echo "10. Axelar"
+echo "11. Axelar Testnet"
 
 read i
 
@@ -47,6 +49,8 @@ elif [ {$i} == {$AGORIC} ]; then
 elif [ {$i} == {$REGEN} ]; then
     bash ./chians/regen_setting.sh
 elif [ {$i} == {$AXELAR} ]; then
+    bash ./chians/axelar_setting.sh
+elif [ {$i} == {$AXELAR_TESTNET} ]; then
     bash ./chians/axelar_setting.sh
 else
     echo "It's a chain that doesn't exist."
