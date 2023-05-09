@@ -16,11 +16,11 @@ CHAIN_BINARY=persistenceCore
 ORACLE_BINARY=oracle-feederd
 CHAIN_ID=test-core-1
 SNAP_SHOT_URL=https://snapshots.polkachu.com/testnet-snapshots/persistence/persistence_11211551.tar.lz4
-SEEDS="5c2a752c9b1952dbed075c56c600c3a79b58c395@persistence.testnet.seed.autostake.net:26896"
+SEEDS=""
 PERSISTENT_PEERS="5c2a752c9b1952dbed075c56c600c3a79b58c395@persistence.testnet.seed.autostake.net:26896,14ecdc5126ea8d93c7d3a863d9d38e380e46fc06@185.225.233.30:26656"
 SYNC_RPC_1=https://persistence-testnet-rpc.polkachu.com:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
-GENESIS_URL=https://snapshots.polkachu.com/testnet-genesis/persistence/genesis.json
+GENESIS_URL=https://raw.githubusercontent.com/persistenceOne/networks/master/test-core-1/final_genesis.json
 MINIMUM_GAS_PRICES="0.005uxprt"
 ORACLE_FEEDER_KEY_PASSPHRASE=""
 CHECK=1
@@ -221,3 +221,5 @@ LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
 EOF
+
+sudo systemctl enable $ORACLE_BINARY.service
