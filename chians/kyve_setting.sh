@@ -16,7 +16,7 @@ SEEDS=""
 PERSISTENT_PEERS="dc56abb8aa8905eb9d8cfdf367fef6425402d4e7@57.128.20.184:39656,0ab23bfd2924c09a0cb2166a78e65d6d0fbd172a@57.128.162.152:26656,25da6253fc8740893277630461eb34c2e4daf545@3.76.244.30:26656,3bbd011b9a19e83337d8abd4b9bfac6d5049a418@44.230.132.79:26656,fae8cd5f04406e64484a7a8b6719eacbb861c094@44.241.103.199:26656,b950b6b08f7a6d5c3e068fcd263802b336ffe047@18.198.182.214:26656,146d27829fd240e0e4672700514e9835cb6fdd98@34.212.201.1:26656,36afae529bd7fb07c6d0650c9acacdd4e5dad32a@23.88.5.169:13656"
 SYNC_RPC_1=https://rpc.kyve.nodestake.top:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
-GENESIS_URL=https://snapshots.nodestake.top/temp/genesis.json
+GENESIS_URL=https://raw.githubusercontent.com/KYVENetwork/networks/main/kyve-1/genesis.json
 MINIMUM_GAS_PRICES="1000000uhuahua"
 CHECK=1
 
@@ -62,6 +62,7 @@ git clone $GITURL
 cd $CHAIN_NAME
 git checkout $BRANCH
 make build ENV=mainnet
+cd build
 cp kyved $HOME/go/bin/kyved
 
 # Initialize home directory
