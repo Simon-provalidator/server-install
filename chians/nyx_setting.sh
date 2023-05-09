@@ -63,7 +63,7 @@ cd $CHAIN_NAME
 git checkout $BRANCH
 make build
 cd build
-
+cp nyxd $HOME/go/bin/nyxd
 
 # Initialize home directory
 echo "Initializing $NODE_HOME..."
