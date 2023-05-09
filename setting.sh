@@ -16,6 +16,8 @@ AXELAR_TESTNET=11
 NYM=12
 PERSISTENCE=13
 PERSISTENCE_TESTNET=14
+NOBLE=15
+NOBLE_TESTNET=16
 
 # Select Chain
 echo "What network you going to interact:"
@@ -33,6 +35,8 @@ echo "11. Axelar Testnet"
 echo "12. Nym"
 echo "13. Persistence"
 echo "14. Persistence Testnet"
+echo "15. Noble"
+echo "16. Noble Testnet"
 
 read i
 
@@ -64,6 +68,10 @@ elif [ {$i} == {$PERSISTENCE} ]; then
     bash ./chians/persistence_setting.sh
 elif [ {$i} == {$PERSISTENCE_TESTNET} ]; then
     bash ./chians/persistence_testnet_setting.sh
+elif [ {$i} == {$NOBLE} ]; then
+    bash ./chians/noble_setting.sh
+elif [ {$i} == {$NOBLE_TESTNET} ]; then
+    bash ./chians/noble_testnet_setting.sh
 else
     echo "It's a chain that doesn't exist."
 fi
