@@ -17,7 +17,7 @@ SEEDS=""
 PERSISTENT_PEERS=""
 SYNC_RPC_1=https://axelar-rpc.polkachu.com:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
-GENESIS_URL=https://snapshots.polkachu.com/genesis/axelar/genesis.json
+GENESIS_URL=https://snapshots.polkachu.com/testnet-genesis/axelar/genesis.json
 MINIMUM_GAS_PRICES="0.007uaxl"
 CHECK=1
 

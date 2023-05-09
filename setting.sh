@@ -51,7 +51,7 @@ elif [ {$i} == {$REGEN} ]; then
 elif [ {$i} == {$AXELAR} ]; then
     bash ./chians/axelar_setting.sh
 elif [ {$i} == {$AXELAR_TESTNET} ]; then
-    bash ./chians/axelar_setting.sh
+    bash ./chians/axelar_testnet_setting.sh
 else
     echo "It's a chain that doesn't exist."
 fi
