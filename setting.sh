@@ -21,6 +21,7 @@ NOBLE_TESTNET=16
 KYVE=17
 CRESCENT=18
 STRIDE=19
+QUASAR=20
 
 # Select Chain
 echo "What network you going to interact:"
@@ -43,6 +44,7 @@ echo "16. Noble Testnet"
 echo "17. Kyve"
 echo "18. Crescent"
 echo "19. Stride"
+echo "20. Quasar"
 
 read i
 
@@ -84,6 +86,8 @@ elif [ {$i} == {$CRESCENT} ]; then
     bash ./chians/crescent_setting.sh
 elif [ {$i} == {$STRIDE} ]; then
     bash ./chians/stride_setting.sh
+elif [ {$i} == {$QUASAR} ]; then
+    bash ./chians/quasar_setting.sh
 else
     echo "It's a chain that doesn't exist."
 fi
