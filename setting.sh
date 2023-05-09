@@ -15,6 +15,7 @@ AXELAR=10
 AXELAR_TESTNET=11
 NYM=12
 PERSISTENCE=13
+PERSISTENCE_TESTNET=14
 
 # Select Chain
 echo "What network you going to interact:"
@@ -31,6 +32,7 @@ echo "10. Axelar"
 echo "11. Axelar Testnet"
 echo "12. Nym"
 echo "13. Persistence"
+echo "14. Persistence Testnet"
 
 read i
 
@@ -60,6 +62,8 @@ elif [ {$i} == {$NYM} ]; then
     bash ./chians/nyx_setting.sh
 elif [ {$i} == {$PERSISTENCE} ]; then
     bash ./chians/persistence_setting.sh
+elif [ {$i} == {$PERSISTENCE_TESTNET} ]; then
+    bash ./chians/persistence_testnet_setting.sh
 else
     echo "It's a chain that doesn't exist."
 fi
