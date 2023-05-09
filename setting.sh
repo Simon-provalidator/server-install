@@ -18,6 +18,7 @@ PERSISTENCE=13
 PERSISTENCE_TESTNET=14
 NOBLE=15
 NOBLE_TESTNET=16
+KYVE=17
 
 # Select Chain
 echo "What network you going to interact:"
@@ -37,6 +38,7 @@ echo "13. Persistence"
 echo "14. Persistence Testnet"
 echo "15. Noble"
 echo "16. Noble Testnet"
+echo "17. Kyve"
 
 read i
 
@@ -72,6 +74,8 @@ elif [ {$i} == {$NOBLE} ]; then
     bash ./chians/noble_setting.sh
 elif [ {$i} == {$NOBLE_TESTNET} ]; then
     bash ./chians/noble_testnet_setting.sh
+elif [ {$i} == {$KYVE} ]; then
+    bash ./chians/kyve_setting.sh
 else
     echo "It's a chain that doesn't exist."
 fi
