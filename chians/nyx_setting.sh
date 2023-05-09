@@ -4,8 +4,9 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=v0.26.1
-NODE_HOME=$HOME/.nyxd
+BECH32_PREFIX=n
+BRANCH=release/v0.26.1
+NODE_HOME=$HOME/.wasmd
 NODE_MONIKER=validator
 GITURL=https://github.com/nymtech/nyxd
 CHAIN_NAME=nyxd
@@ -17,7 +18,7 @@ PERSISTENT_PEERS="b2525ab38ff7478ef4c66db5a51abc7ad2aa51d6@141.94.254.145:34656,
 SYNC_RPC_1=https://nym-rpc.polkachu.com:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
 GENESIS_URL=https://snapshots.polkachu.com/genesis/nym/genesis.json
-MINIMUM_GAS_PRICES="1000000unym,1000000unyx"
+MINIMUM_GAS_PRICES="0.025unym,0.025unyx"
 CHECK=1
 
 # Basic Installation
