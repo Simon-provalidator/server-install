@@ -4,20 +4,20 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=v0.33.0
-NODE_HOME=$HOME/.axelar
+BRANCH=v0.26.1
+NODE_HOME=$HOME/.nyxd
 NODE_MONIKER=validator
-GITURL=https://github.com/axelarnetwork/axelar-core
-CHAIN_NAME=axelar-core
-CHAIN_BINARY=axelard
-CHAIN_ID=axelar-dojo-1
-SNAP_SHOT_URL=""
-SEEDS="3d67d0646cddcc203b41434aceea64ade22ba6fc@k8s-mainnet-axelarco-79b464ee93-f03cb16c57cf7cb2.elb.us-east-2.amazonaws.com:26656"
-PERSISTENT_PEERS="4b571eaa39b19f44c0498d748a018de1c9c98458@167.71.188.59:26656"
-SYNC_RPC_1=https://axelar-rpc.polkachu.com:443
+GITURL=https://github.com/nymtech/nyxd
+CHAIN_NAME=nyxd
+CHAIN_BINARY=nyxd
+CHAIN_ID=nyx
+SNAP_SHOT_URL=https://snapshots.polkachu.com/snapshots/nym/nym_6945925.tar.lz4
+SEEDS=""
+PERSISTENT_PEERS="b2525ab38ff7478ef4c66db5a51abc7ad2aa51d6@141.94.254.145:34656,dc0af6cde717420e9f8d35a3e0883aee0e5dbff3@15.235.14.66:26656,4ea09503967eda46534f7238ec082d643b7f769d@65.108.7.189:26656,ab86d4abd19d1e13f79897b933f0e91e5043aea7@64.227.23.5:26656"
+SYNC_RPC_1=https://nym-rpc.polkachu.com:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
-GENESIS_URL=https://services.staketab.com/axelar/genesis.json
-MINIMUM_GAS_PRICES="0uaxl"
+GENESIS_URL=https://snapshots.polkachu.com/genesis/nym/genesis.json
+MINIMUM_GAS_PRICES="1000000unym,1000000unyx"
 CHECK=1
 
 # Basic Installation
@@ -62,8 +62,8 @@ git clone $GITURL
 cd $CHAIN_NAME
 git checkout $BRANCH
 make build
-cd bin
-cp axelard $HOME/go/bin/axelard
+cd build
+
 
 # Initialize home directory
 echo "Initializing $NODE_HOME..."
@@ -87,7 +87,7 @@ mv genesis.json $NODE_HOME/config/genesis.json
 if $STATE_SYNC ; then
     echo "Configuring state sync..."
     CURRENT_BLOCK=$(curl -s $SYNC_RPC_1/block | jq -r '.result.block.header.height')
-    TRUST_HEIGHT=$[$CURRENT_BLOCK-2000]
+    TRUST_HEIGHT=$[$CURRENT_BLOCK-1000]
     TRUST_BLOCK=$(curl -s $SYNC_RPC_1/block\?height\=$TRUST_HEIGHT)
     TRUST_HASH=$(echo $TRUST_BLOCK | jq -r '.result.block_id.hash')
     sed -i -e '/enable =/ s/= .*/= true/' $NODE_HOME/config/config.toml

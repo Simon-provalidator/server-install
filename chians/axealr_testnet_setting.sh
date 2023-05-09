@@ -5,19 +5,20 @@ source ./config/config.sh
 
 # Configuration
 BRANCH=v0.33.0
+TOFND_RELEASE=v0.10.1
 NODE_HOME=$HOME/.axelar
 NODE_MONIKER=validator
 GITURL=https://github.com/axelarnetwork/axelar-core
 CHAIN_NAME=axelar-core
 CHAIN_BINARY=axelard
-CHAIN_ID=axelar-dojo-1
-SNAP_SHOT_URL=""
-SEEDS="3d67d0646cddcc203b41434aceea64ade22ba6fc@k8s-mainnet-axelarco-79b464ee93-f03cb16c57cf7cb2.elb.us-east-2.amazonaws.com:26656"
-PERSISTENT_PEERS="4b571eaa39b19f44c0498d748a018de1c9c98458@167.71.188.59:26656"
+CHAIN_ID=axelar-testnet-lisbon-3
+SNAP_SHOT_URL="https://snapshots.polkachu.com/testnet-snapshots/axelar/axelar_7500214.tar.lz4"
+SEEDS=""
+PERSISTENT_PEERS=""
 SYNC_RPC_1=https://axelar-rpc.polkachu.com:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
-GENESIS_URL=https://services.staketab.com/axelar/genesis.json
-MINIMUM_GAS_PRICES="0uaxl"
+GENESIS_URL=https://snapshots.polkachu.com/genesis/axelar/genesis.json
+MINIMUM_GAS_PRICES="0.007uaxl"
 CHECK=1
 
 # Basic Installation
@@ -188,3 +189,9 @@ sudo systemctl enable $CHAIN_BINARY.service
 sudo systemctl start $CHAIN_BINARY.service
 sudo systemctl restart systemd-journald
 fi
+
+# Tofnd setup
+wget https://github.com/axelarnetwork/tofnd/releases/download/$TOFND_RELEASE/tofnd-linux-amd64-$TOFND_RELEASE
+mv tofnd-linux-amd64-$TOFND_RELEASE tofnd
+chmod +x tofnd
+sudo mv tofnd $HOME/go/bin/tofnd
