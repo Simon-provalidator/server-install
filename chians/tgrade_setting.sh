@@ -4,20 +4,20 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=v0.11.7
-NODE_HOME=$HOME/.paloma
+BRANCH=v2.0.4
+NODE_HOME=$HOME/.tgrade
 NODE_MONIKER=validator
-GITURL=https://github.com/palomachain/paloma
-CHAIN_NAME=paloma
-CHAIN_BINARY=palomad
-CHAIN_ID=messenger
-SNAP_SHOT_URL=https://snapshots1.nodejumper.io/paloma/messenger_2023-05-09.tar.lz4
-SEEDS=""
-PERSISTENT_PEERS="8ed8cddfac504d986a2c6545def0e57b2c6aa5db@paloma.nodejumper.io:38656,874ccf9df2e4c678a18a1fb45a1d3bb703f87fa0@65.109.172.249:26656,6ee0ed8ddb1eaaf095686962d71fddb1383b5199@65.21.138.123:26656,ab6875bd52d6493f39612eb5dff57ced1e3a5ad6@95.217.229.18:10656,9581fadb9a32f2af89d575bb0f2661b9bb216d41@46.4.23.108:26656,b244dfc19293103040d4bdad359534d0990a9070@45.140.185.181:26656,810bea15ec11d510dd33170851ee2ab74c48b6de@81.0.221.57:26656,741bdc1ffdd93b7de09d8417bc0ada0d2285affa@65.109.57.67:27656,16f0d09580054101394ea08bbb48b1ad5bb91a27@95.214.52.144:10656,e4b7cdd48c39c355e9a3480f4f4d5afab8fb0e08@46.0.203.78:26637,53f37ac93aec70dea3abc40108f42a00877b4665@64.227.142.91:26656,d9bfa29e0cf9c4ce0cc9c26d98e5d97228f93b0b@65.109.88.38:10656,b92c94f00b46500a5ff8920acd438c0873c2f9da@50.116.13.101:26656,317141e329bc214a76ba92201f6818574ebe5323@135.181.114.98:36656,99c890c97afc8abfdfeff662d539af5c504a0baf@88.99.67.234:26656,41a47bae18f81c1f626e4b238221b77e274424d7@45.33.65.223:26656"
-SYNC_RPC_1=https://paloma.nodejumper.io:443
+GITURL=https://github.com/confio/tgrade
+CHAIN_NAME=tgrade
+CHAIN_BINARY=tgrade
+CHAIN_ID=tgrade-mainnet-1
+SNAP_SHOT_URL=
+SEEDS="0c3b7d5a4253216de01b8642261d4e1e76aee9d8@45.76.202.195:26656,8639bc931d5721a64afc1ea52ca63ae40161bd26@194.163.144.63:26656"
+PERSISTENT_PEERS="0a63421f67d02e7fb823ea6d6ceb8acf758df24d@142.132.226.137:26656,4a319eead699418e974e8eed47c2de6332c3f825@167.235.255.9:26656,6918efd409684d64694cac485dbcc27dfeea4f38@49.12.240.203:26656,7383b50b4db8634be6a94fdb033e58e250d0745d@161.35.124.144:26656"
+SYNC_RPC_1=https://rpc.mainnet-1.tgrade.confio.run:443
 SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_1"
-GENESIS_URL=https://raw.githubusercontent.com/palomachain/mainnet/master/messenger/genesis.json
-MINIMUM_GAS_PRICES="0.0001ugrain"
+GENESIS_URL=https://raw.githubusercontent.com/confio/tgrade-networks/main/mainnet-1/config/genesis.json
+MINIMUM_GAS_PRICES="0.05utgd"
 CHECK=1
 
 # Basic Installation
@@ -186,29 +186,3 @@ sudo systemctl enable $CHAIN_BINARY.service
 sudo systemctl start $CHAIN_BINARY.service
 sudo systemctl restart systemd-journald
 fi
-
-# Pigeon setup
-wget -O - https://github.com/palomachain/pigeon/releases/download/v0.11.5/pigeon_Linux_x86_64.tar.gz | tar -C $HOME/go/bin -xvzf - pigeon
-chmod +x $HOME/go/bin/pigeon
-mkdir $HOME/.pigeon
-
-# Pigeon service
-cat <<EOT >/etc/systemd/system/pigeond.service
-[Unit]
-Description=Pigeon daemon
-After=network-online.target
-ConditionPathExists=$HOME/go/bin/pigeon
-
-[Service]
-Type=simple
-Restart=always
-RestartSec=5
-User=${USER}
-WorkingDirectory=~
-EnvironmentFile=${HOME}/.pigeon/env.sh
-ExecStart=$HOME/go/bin/pigeon start
-ExecReload=
-
-[Install]
-WantedBy=multi-user.target
-EOT

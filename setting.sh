@@ -23,6 +23,7 @@ CRESCENT=18
 STRIDE=19
 QUASAR=20
 PALOMA=21
+TGRADE=22
 
 # Select Chain
 echo "What network you going to interact:"
@@ -47,6 +48,7 @@ echo "18. Crescent"
 echo "19. Stride"
 echo "20. Quasar"
 echo "21. Paloma"
+echo "22. Tgrade"
 
 read i
 
@@ -92,6 +94,8 @@ elif [ {$i} == {$QUASAR} ]; then
     bash ./chians/quasar_setting.sh
 elif [ {$i} == {$PALOMA} ]; then
     bash ./chians/paloma_setting.sh
+elif [ {$i} == {$TGRADE} ]; then
+    bash ./chians/tgrade_setting.sh
 else
     echo "It's a chain that doesn't exist."
 fi
