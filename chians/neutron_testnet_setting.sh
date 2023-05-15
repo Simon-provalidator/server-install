@@ -22,14 +22,14 @@ NEUTRON_PERSISTENT_PEERS=""
 NEUTORN_SYNC_RPC_1=http://pion.rs-testnet.polypore.xyz:26657
 NEUTORN_SYNC_RPC_SERVERS="$NEUTORN_SYNC_RPC_1,$NEUTORN_SYNC_RPC_1"
 NEUTORN_GENESIS_URL=https://github.com/cosmos/testnets/raw/master/replicated-security/pion-1/pion-1-genesis.json
-NEUTORN_MINIMUM_GAS_PRICES="0.05utgd"
+NEUTORN_MINIMUM_GAS_PRICES=""
 PROVIDER_SEEDS="08ec17e86dac67b9da70deb20177655495a55407@provider-seed-01.rs-testnet.polypore.xyz:26656,4ea6e56300a2f37b90e58de5ee27d1c9065cf871@provider-seed-02.rs-testnet.polypore.xyz:26656"
 PROVIDER_PERSISTENT_PEERS=""
 PROVIDER_SYNC_RPC_1=https://rpc.provider-state-sync-01.rs-testnet.polypore.xyz:443
 PROVIDER_SYNC_RPC_2=https://rpc.provider-state-sync-02.rs-testnet.polypore.xyz:443
 PROVIDER_SYNC_RPC_SERVERS="$PROVIDER_SYNC_RPC_1,$PROVIDER_SYNC_RPC_2"
 PROVIDER_GENESIS_URL=https://github.com/cosmos/testnets/raw/master/replicated-security/provider/provider-genesis.json
-PROVIDER_MINIMUM_GAS_PRICES="0.05utgd"
+PROVIDER_MINIMUM_GAS_PRICES=""
 CHECK=1
 
 # Basic Installation
@@ -211,7 +211,7 @@ After=network-online.target
 [Service]
 User=$USER
 ExecStart=$(which gaiad) start
-Restart=on-failure
+Restart=always
 RestartSec=10
 LimitNOFILE=10000
 
@@ -243,7 +243,7 @@ After=network-online.target
 [Service]
 User=$USER
 ExecStart=$(which hermes) start
-Restart=on-failure
+Restart=always
 RestartSec=10
 LimitNOFILE=10000
 
