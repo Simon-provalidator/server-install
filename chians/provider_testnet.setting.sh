@@ -4,19 +4,20 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=v1.0.0-rc1
-NODE_HOME=$HOME/.neutrond
+BRANCH=v9.0.3-rc0
+NODE_HOME=$HOME/.gaia
 NODE_MONIKER=validator
-GITURL=https://github.com/neutron-org/neutron
-CHAIN_NAME=neutron
-CHAIN_BINARY=neutrond
-CHAIN_ID=pion-1
+GITURL=https://github.com/cosmos/gaia
+CHAIN_NAME=gaia
+CHAIN_BINARY=gaiad
+CHAIN_ID=provider
 SNAP_SHOT_URL=
-SEEDS="e2c07e8e6e808fb36cca0fc580e31216772841df@p2p-palvus.pion-1.ntrn.tech:26656"
+SEEDS="08ec17e86dac67b9da70deb20177655495a55407@provider-seed-01.rs-testnet.polypore.xyz:26656,4ea6e56300a2f37b90e58de5ee27d1c9065cf871@provider-seed-02.rs-testnet.polypore.xyz:26656"
 PERSISTENT_PEERS=""
-SYNC_RPC_1=http://pion.rs-testnet.polypore.xyz:26657
-SYNC_RPC_SERVERS="$NEUTORN_SYNC_RPC_1,$NEUTORN_SYNC_RPC_1"
-GENESIS_URL=https://github.com/cosmos/testnets/raw/master/replicated-security/pion-1/pion-1-genesis.json
+SYNC_RPC_1=https://rpc.provider-state-sync-01.rs-testnet.polypore.xyz:443
+SYNC_RPC_2=https://rpc.provider-state-sync-02.rs-testnet.polypore.xyz:443
+SYNC_RPC_SERVERS="$PROVIDER_SYNC_RPC_1,$PROVIDER_SYNC_RPC_2"
+GENESIS_URL=https://github.com/cosmos/testnets/raw/master/replicated-security/provider/provider-genesis.json
 MINIMUM_GAS_PRICES=""
 CHECK=1
 
@@ -54,6 +55,11 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 EOF
 source $HOME/.profile
 mkdir -p ~/go/bin | mkdir -p ~/go/src/github.com | mkdir -p ~/go/pkg
+
+# Install provider binary
+# wget https://github.com/cosmos/gaia/releases/download/v9.0.3-rc0/gaiad-v9.0.3-rc0-linux-amd64
+# mv gaiad-v9.0.3-rc0-linux-amd64 $HOME/go/bin/gaiad
+# chmod +x gaiad
 
 # Install $CHAIN_BINARY binary
 echo "Installing $CHAIN_NAME..."
