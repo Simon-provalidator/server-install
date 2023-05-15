@@ -16,7 +16,7 @@ SEEDS="08ec17e86dac67b9da70deb20177655495a55407@provider-seed-01.rs-testnet.poly
 PERSISTENT_PEERS=""
 SYNC_RPC_1=https://rpc.provider-state-sync-01.rs-testnet.polypore.xyz:443
 SYNC_RPC_2=https://rpc.provider-state-sync-02.rs-testnet.polypore.xyz:443
-SYNC_RPC_SERVERS="$PROVIDER_SYNC_RPC_1,$PROVIDER_SYNC_RPC_2"
+SYNC_RPC_SERVERS="$SYNC_RPC_1,$SYNC_RPC_2"
 GENESIS_URL=https://github.com/cosmos/testnets/raw/master/replicated-security/provider/provider-genesis.json
 MINIMUM_GAS_PRICES=""
 CHECK=1
@@ -57,9 +57,9 @@ source $HOME/.profile
 mkdir -p ~/go/bin | mkdir -p ~/go/src/github.com | mkdir -p ~/go/pkg
 
 # Install provider binary
-# wget https://github.com/cosmos/gaia/releases/download/v9.0.3-rc0/gaiad-v9.0.3-rc0-linux-amd64
-# mv gaiad-v9.0.3-rc0-linux-amd64 $HOME/go/bin/gaiad
-# chmod +x gaiad
+wget https://github.com/cosmos/gaia/releases/download/v9.0.3-rc0/gaiad-v9.0.3-rc0-linux-amd64
+mv gaiad-v9.0.3-rc0-linux-amd64 $HOME/go/bin/gaiad
+chmod +x gaiad
 
 # Install $CHAIN_BINARY binary
 echo "Installing $CHAIN_NAME..."
