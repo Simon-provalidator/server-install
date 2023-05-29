@@ -27,7 +27,7 @@ sudo apt-get upgrade -y
 sudo apt-get install build-essential make jq net-tools gcc gzip sysstat htop chrony manpages-dev -y
 sudo apt install make clang pkg-config libssl-dev build-essential git jq ncdu bsdmainutils htop net-tools lsof -y < "/dev/null"
 sudo apt update
-sudo apt install snapd yarn -y
+sudo apt install snapd -y
 sudo snap install lz4
 
 # Install nodejs
@@ -36,6 +36,9 @@ curl https://deb.nodesource.com/setup_18.x | sudo bash
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt install nodejs=18.* yarn build-essential jq -y
+
+# Install yran
+npm install -g yarn
 
 # Install go $GO_VERSION
 echo "Installing go..."
