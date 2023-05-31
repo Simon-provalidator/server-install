@@ -27,6 +27,7 @@ TGRADE=22
 BABYLON=23
 PROVIDER=24
 NEUTRON=25
+DUALITY=26
 
 # Select Chain
 echo "What network you going to interact:"
@@ -55,6 +56,7 @@ echo "22. Tgrade"
 echo "23. Baylon Testnet"
 echo "24. Provider Testnet"
 echo "25. Neutron Testnet"
+echo "26. Duality Testnet"
 
 read i
 
@@ -108,6 +110,8 @@ elif [ {$i} == {$PROVIDER} ]; then
     bash ./chians/provider_testnet_setting.sh
 elif [ {$i} == {$NEUTRON} ]; then
     bash ./chians/neutron_testnet_setting.sh
+elif [ {$i} == {$DUALITY} ]; then
+    bash ./chians/duality_testnet_setting.sh
 else
     echo "It's a chain that doesn't exist."
 fi
