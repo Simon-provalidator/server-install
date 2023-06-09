@@ -214,7 +214,7 @@ After=network-online.target
 [Service]
 User=$USER
 ExecStart=$(which hermes) start
-Restart=always
+Restart=on-failure
 RestartSec=10
 LimitNOFILE=10000
 

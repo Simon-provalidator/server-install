@@ -214,7 +214,7 @@ Environment="ORACLE_FEEDER_KEY_PASSPHRASE=$ORACLE_FEEDER_KEY_PASSPHRASE"
 Type=simple
 User=root
 ExecStart=$HOME/go/bin/oracle-feeder $NODE_HOME/config/price-feeder.toml --log-level=debug
-Restart=always
+Restart=on-failure
 RestartSec=14400s
 LimitNOFILE=65535
 

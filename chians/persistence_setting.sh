@@ -4,7 +4,7 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=v7.0.1
+BRANCH=v7.0.2
 NODE_HOME=$HOME/.persistenceCore
 NODE_MONIKER=validator
 GITURL=https://github.com/persistenceOne/persistenceCore
@@ -170,7 +170,7 @@ After=network-online.target
 [Service]
 User=$USER
 ExecStart=$HOME/go/bin/$CHAIN_BINARY start
-Restart=always
+Restart=on-failure
 RestartSec=10
 LimitNOFILE=10000
 
