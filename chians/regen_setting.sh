@@ -133,7 +133,7 @@ After=network-online.target
 [Service]
 User=$USER
 ExecStart=$HOME/go/bin/cosmovisor run start --x-crisis-skip-assert-invariants
-Restart=always
+Restart=on-failure
 RestartSec=10
 LimitNOFILE=50000
 Environment='DAEMON_NAME=$CHAIN_BINARY'
