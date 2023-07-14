@@ -4,7 +4,7 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=v4.0.0
+BRANCH=v4.2.0
 NODE_HOME=$HOME/.crescent
 NODE_MONIKER=validator
 GITURL=https://github.com/crescent-network/crescent
