@@ -26,8 +26,12 @@ PALOMA=21
 TGRADE=22
 BABYLON=23
 PROVIDER=24
-NEUTRON=25
+NEUTRON_TESTNET=25
 DUALITY=26
+ARCHWAY=27
+NEUTRON=28
+CANTO=29
+XPLA=30
 
 # Select Chain
 echo "What network you going to interact:"
@@ -57,6 +61,10 @@ echo "23. Baylon Testnet"
 echo "24. Provider Testnet"
 echo "25. Neutron Testnet"
 echo "26. Duality Testnet"
+echo "27. Archway"
+echo "28. Neutron"
+echo "29. Canto"
+echo "30. Xpla"
 
 read i
 
@@ -108,10 +116,18 @@ elif [ {$i} == {$BABYLON} ]; then
     bash ./chians/babylon_testnet_setting.sh
 elif [ {$i} == {$PROVIDER} ]; then
     bash ./chians/provider_testnet_setting.sh
-elif [ {$i} == {$NEUTRON} ]; then
+elif [ {$i} == {$NEUTRON_TESTNET} ]; then
     bash ./chians/neutron_testnet_setting.sh
 elif [ {$i} == {$DUALITY} ]; then
     bash ./chians/duality_testnet_setting.sh
+elif [ {$i} == {$ARCHWAY} ]; then
+    bash ./chians/archway_setting.sh
+elif [ {$i} == {$NEUTRON} ]; then
+    bash ./chians/neutron_setting.sh
+elif [ {$i} == {$CANTO} ]; then
+    bash ./chians/canto_setting.sh
+elif [ {$i} == {$XPLA} ]; then
+    bash ./chians/xpla_setting.sh
 else
     echo "It's a chain that doesn't exist."
 fi
