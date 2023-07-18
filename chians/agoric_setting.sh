@@ -158,7 +158,6 @@ EOF
 sudo systemctl daemon-reload
 
 # Enable and start
-sudo systemctl enable $SERVICE_NAME.service
 sudo systemctl start $SERVICE_NAME.service
 sudo systemctl restart systemd-journald
 

@@ -153,9 +153,6 @@ EOF
 # Start service
 sudo systemctl daemon-reload
 
-# Enable and start
-sudo systemctl enable $SERVICE_NAME.service
-
 else
 # Set up Daemon
 echo "Creating $CHAIN_BINARY.service..."
