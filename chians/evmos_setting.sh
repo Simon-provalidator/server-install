@@ -4,7 +4,7 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=v13.0.2
+BRANCH=v14.1.0
 NODE_HOME=$HOME/.evmosd
 NODE_MONIKER=node
 GITURL=https://github.com/tharsis/evmos
@@ -168,7 +168,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$HOME/go/bin/$CHAIN_BINARY start
+ExecStart=$HOME/go/bin/$CHAIN_BINARY start --x-crisis-skip-assert-invariants
 Restart=on-failure
 RestartSec=10
 LimitNOFILE=10000

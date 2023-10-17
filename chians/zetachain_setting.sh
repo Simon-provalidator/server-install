@@ -123,7 +123,6 @@ SERVICE_NAME=cosmovisor
 echo "Setting up cosmovisor..."
 mkdir -p $NODE_HOME/cosmovisor/genesis/bin
 mkdir -p $NODE_HOME/cosmovisor/upgrades
-ln -s $HOME/go/src/github.com/agoric-sdk/bin/agd $NODE_HOME/cosmovisor/genesis/bin/agd
 
 echo "Installing cosmovisor..."
 export BINARY=$NODE_HOME/cosmovisor/genesis/bin/$CHAIN_BINARY
