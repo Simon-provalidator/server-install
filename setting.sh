@@ -77,7 +77,7 @@ elif [ {$i} == {$SIFCHIAN} ]; then
 elif [ {$i} == {$EVMOS} ]; then
     bash ./chians/evmos_setting.sh
 elif [ {$i} == {$OSMOSIS} ]; then
-    bash ./chians/evmos_setting.sh
+    bash ./chians/osmosis_setting.sh
 elif [ {$i} == {$UMEE} ]; then
     bash ./chians/umee_setting.sh
 elif [ {$i} == {$CHIHUAHUA} ]; then
