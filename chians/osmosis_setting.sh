@@ -4,7 +4,7 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=v15.1.0
+BRANCH=v20.1.2
 NODE_HOME=$HOME/.osmosisd
 NODE_MONIKER=node
 GITURL=https://github.com/osmosis-labs/osmosis
