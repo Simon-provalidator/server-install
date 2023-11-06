@@ -3,7 +3,7 @@ You need to modify it and use it. {server_ip}, {snapshot_url}
 ```
 config.sh
 # Configuration
-GO_VERSION=1.20.0
+GO_VERSION=1.20.3
 STATE_SYNC=false
 SNAP_SHOT=true
 EXTERNAL_ADDRESS="{server_ip}:26656"
