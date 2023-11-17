@@ -4,7 +4,7 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=v14.1.0
+BRANCH=v15.0.0
 NODE_HOME=$HOME/.evmosd
 NODE_MONIKER=node
 GITURL=https://github.com/tharsis/evmos
