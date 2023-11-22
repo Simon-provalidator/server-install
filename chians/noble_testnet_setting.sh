@@ -4,7 +4,7 @@
 source ./config/config.sh
 
 # Configuration
-BRANCH=v0.5.0
+BRANCH=v4.0.1
 NODE_HOME=$HOME/.noble
 NODE_MONIKER=validator
 GITURL=https://github.com/strangelove-ventures/noble
